@@ -13,7 +13,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/GhostNoodl/sigil/internal/auth"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/auth"
 )
 
 // steamAppID is Wizard101's app id on Steam (US / KingsIsle build).

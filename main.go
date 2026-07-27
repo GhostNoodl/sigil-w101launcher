@@ -16,10 +16,10 @@ import (
 
 	"golang.org/x/term"
 
-	"github.com/GhostNoodl/sigil/internal/app"
-	"github.com/GhostNoodl/sigil/internal/config"
-	"github.com/GhostNoodl/sigil/internal/creds"
-	"github.com/GhostNoodl/sigil/internal/webui"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/app"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/config"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/creds"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/webui"
 )
 
 const usage = `sigil - custom Wizard101 launcher (US servers)

@@ -9,8 +9,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/GhostNoodl/sigil/internal/config"
-	"github.com/GhostNoodl/sigil/internal/creds"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/config"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/creds"
 )
 
 func TestLiveSteamLogin(t *testing.T) {

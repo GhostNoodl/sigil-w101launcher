@@ -1,4 +1,4 @@
-module github.com/GhostNoodl/sigil
+module github.com/GhostNoodl/sigil-w101launcher
 
 go 1.26
 

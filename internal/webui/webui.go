@@ -19,11 +19,11 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 
-	launcherapp "github.com/GhostNoodl/sigil/internal/app"
-	"github.com/GhostNoodl/sigil/internal/config"
-	"github.com/GhostNoodl/sigil/internal/creds"
-	"github.com/GhostNoodl/sigil/internal/launch"
-	"github.com/GhostNoodl/sigil/internal/news"
+	launcherapp "github.com/GhostNoodl/sigil-w101launcher/internal/app"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/config"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/creds"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/launch"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/news"
 )
 
 //go:embed all:frontend

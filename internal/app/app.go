@@ -7,10 +7,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/GhostNoodl/sigil/internal/auth"
-	"github.com/GhostNoodl/sigil/internal/config"
-	"github.com/GhostNoodl/sigil/internal/launch"
-	"github.com/GhostNoodl/sigil/internal/patch"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/auth"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/config"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/launch"
+	"github.com/GhostNoodl/sigil-w101launcher/internal/patch"
 )
 
 type PlayOptions struct {

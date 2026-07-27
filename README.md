@@ -41,7 +41,7 @@ to character select in seconds.
 ## Quick start
 
 1. Download `sigil.exe` from
-   [Releases](https://github.com/GhostNoodl/sigil/releases) — it's a
+   [Releases](https://github.com/GhostNoodl/sigil-w101launcher/releases) — it's a
    single self-contained file (icon, manifest, and frontend all embedded).
 2. Double-click it.
 3. Enter your Wizard101 username and password, leave **Remember me** on,
