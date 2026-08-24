@@ -51,6 +51,9 @@ func TestLiveFileList(t *testing.T) {
 		if slices.Contains(metaTables, table.Name) {
 			continue // meta tables have a different record schema
 		}
+		if !safeTableName(table.Name) {
+			t.Errorf("manifest has unsafe table name %q", table.Name)
+		}
 		if table.Name == "Base" {
 			b := &struct{ records int }{len(table.Records)}
 			base = b

@@ -21,7 +21,9 @@ to character select in seconds.
   and starts the game with a session token. No patcher UI, no login screen.
 - **Fast incremental patching** — verifies only what's installed against the
   official patch manifest (CRC-checked, concurrent, atomic downloads).
-  A full check of a complete install takes seconds, not minutes.
+  Files that already passed CRC verification are cached and re-read only when
+  their size or modification time changes. Use `patch --full` to bypass the
+  cache and verify every package.
 - **Live news feed** — recent Wizard101 news right in the launcher, pulled
   from the same API as the official website, with one click to open the
   full official news page in a built-in browser window.
