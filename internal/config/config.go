@@ -18,7 +18,8 @@ const (
 	DefaultLocale      = "en-US"
 )
 
-// Well-known install locations, probed in order when no dir is configured.
+// Well-known install locations, probed in order when no dir is configured,
+// before falling back to every Steam library found on the machine.
 var defaultInstallDirs = []string{
 	`C:\ProgramData\KingsIsle Entertainment\Wizard101`,
 	`C:\Program Files (x86)\Steam\steamapps\common\Wizard101`,
@@ -109,7 +110,7 @@ func (c *Config) Save() error {
 }
 
 func detectInstallDir() string {
-	for _, dir := range defaultInstallDirs {
+	for _, dir := range slices.Concat(defaultInstallDirs, steamInstallDirs()) {
 		if _, err := os.Stat(filepath.Join(dir, "Bin", "WizardGraphicalClient.exe")); err == nil {
 			return dir
 		}

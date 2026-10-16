@@ -1,14 +1,17 @@
 module github.com/GhostNoodl/sigil-w101launcher
 
-go 1.26
+go 1.26.0
+
+toolchain go1.26.9
 
 require (
 	github.com/cedws/w101-client-go v0.0.0-20250422122836-cb93a34c8554
-	github.com/cedws/w101-proto-go v0.0.0-20250502234115-9d76eaa68442
-	github.com/wailsapp/wails/v2 v2.13.0
+	github.com/cedws/w101-proto-go v0.0.0-20261004203858-9faf5a48bfe0
+	github.com/wailsapp/wails/v2 v2.16.0
 	github.com/zalando/go-keyring v0.2.8
-	golang.org/x/sync v0.22.0
-	golang.org/x/term v0.45.0
+	golang.org/x/sync v0.24.0
+	golang.org/x/sys v0.49.0
+	golang.org/x/term v0.47.0
 )
 
 require (
@@ -38,8 +41,7 @@ require (
 	github.com/valyala/fasttemplate v1.2.2 // indirect
 	github.com/wailsapp/go-webview2 v1.0.22 // indirect
 	github.com/wailsapp/mimetype v1.4.1 // indirect
-	golang.org/x/crypto v0.51.0 // indirect
-	golang.org/x/net v0.54.0 // indirect
-	golang.org/x/sys v0.47.0 // indirect
-	golang.org/x/text v0.37.0 // indirect
+	golang.org/x/crypto v0.53.0 // indirect
+	golang.org/x/net v0.56.0 // indirect
+	golang.org/x/text v0.39.0 // indirect
 )

@@ -30,7 +30,11 @@ func acquireInstallLock(dir string) (*installLock, error) {
 		return nil, err
 	}
 
-	handle, err := windows.CreateMutex(nil, true, name)
+	// The mutex is used only as a named marker: its existence is the lock.
+	// It is deliberately not owned, because Windows ties mutex ownership to
+	// an OS thread and goroutines move between threads, so ReleaseMutex
+	// from Close could otherwise fail.
+	handle, err := windows.CreateMutex(nil, false, name)
 	if errors.Is(err, windows.ERROR_ALREADY_EXISTS) {
 		_ = windows.CloseHandle(handle)
 		return nil, ErrPatchInProgress
@@ -42,7 +46,5 @@ func acquireInstallLock(dir string) (*installLock, error) {
 }
 
 func (l *installLock) Close() error {
-	releaseErr := windows.ReleaseMutex(l.handle)
-	closeErr := windows.CloseHandle(l.handle)
-	return errors.Join(releaseErr, closeErr)
+	return windows.CloseHandle(l.handle)
 }

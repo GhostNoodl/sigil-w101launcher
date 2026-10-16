@@ -42,7 +42,7 @@ func (o *Options) defaults() {
 		o.DialTimeout = 10 * time.Second
 	}
 	if o.Retries <= 0 {
-		o.Retries = 10
+		o.Retries = 6
 	}
 }
 
@@ -61,14 +61,14 @@ func Login(ctx context.Context, opts Options) (*Session, error) {
 	router := proto.NewMessageRouter()
 	login.RegisterService(&router, handler)
 
-	ctx, cancel := context.WithTimeout(ctx, opts.DialTimeout)
-	defer cancel()
-
-	client, err := dialWithRetries(ctx, opts.Server, &router, opts.Retries)
+	client, err := dialWithRetries(ctx, opts.Server, &router, opts.Retries, opts.DialTimeout)
 	if err != nil {
 		return nil, fmt.Errorf("connecting to login server: %w", err)
 	}
 	defer client.Close()
+
+	ctx, cancel := context.WithTimeout(ctx, responseTimeout)
+	defer cancel()
 
 	var (
 		sid        = client.SessionID()
@@ -107,11 +107,27 @@ func Login(ctx context.Context, opts Options) (*Session, error) {
 	}
 }
 
-func dialWithRetries(ctx context.Context, server string, router *proto.MessageRouter, retries int) (*proto.Client, error) {
+// responseTimeout bounds the wait for the login server's auth reply once
+// connected.
+const responseTimeout = 15 * time.Second
+
+// dialWithRetries gives each connection attempt its own timeout and backs off
+// briefly between attempts, so a dropped connection is retried instead of
+// burning through every attempt in a tight loop.
+func dialWithRetries(ctx context.Context, server string, router *proto.MessageRouter, retries int, timeout time.Duration) (*proto.Client, error) {
 	var err error
-	for range retries {
+	for attempt := range retries {
+		if attempt > 0 {
+			select {
+			case <-time.After(time.Duration(attempt) * 250 * time.Millisecond):
+			case <-ctx.Done():
+				return nil, ctx.Err()
+			}
+		}
+		dialCtx, cancel := context.WithTimeout(ctx, timeout)
 		var client *proto.Client
-		client, err = proto.Dial(ctx, server, router)
+		client, err = proto.Dial(dialCtx, server, router)
+		cancel()
 		if err == nil {
 			return client, nil
 		}

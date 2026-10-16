@@ -1,6 +1,6 @@
 // Package webui is the graphical launcher: a Wails v2 app with an embedded
 // HTML/CSS/JS frontend (WebView2, no cgo). It is the default entry point
-// when w101client is started without arguments.
+// when sigil is started without arguments.
 package webui
 
 import (
@@ -52,7 +52,7 @@ type State struct {
 }
 
 // Version is shown in the settings panel.
-const Version = "1.0.0"
+const Version = "1.1.0"
 
 // Run opens the launcher window and blocks until it is closed.
 func Run() error {

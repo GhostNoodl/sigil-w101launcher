@@ -82,11 +82,18 @@ func Fetch(ctx context.Context) ([]Item, error) {
 	}
 
 	var items []Item
+	// The CMS sometimes publishes the same story twice; show it once.
+	seen := make(map[string]bool)
 	for _, story := range gr.Data.NewsStories {
 		for _, preview := range story.NewsPreview {
 			if preview.Headline == "" {
 				continue
 			}
+			key := preview.Date + "|" + strings.TrimSpace(preview.Headline)
+			if seen[key] {
+				continue
+			}
+			seen[key] = true
 			item := Item{
 				Date:     preview.Date,
 				Headline: strings.TrimSpace(preview.Headline),
