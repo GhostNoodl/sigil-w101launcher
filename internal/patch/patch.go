@@ -444,6 +444,12 @@ func (p *patcher) verifyOrDownload(ctx context.Context, e *fileEntry) (bool, err
 	var dlErr error
 	for attempt := 1; attempt <= p.opts.Retries; attempt++ {
 		if attempt > 1 {
+			// Don't retry a cancelled run, and give a flaky CDN a moment.
+			select {
+			case <-ctx.Done():
+				return false, dlErr
+			case <-time.After(time.Duration(attempt-1) * time.Second):
+			}
 			p.opts.ProgressFunc(fmt.Sprintf("Retrying %s (attempt %d/%d)", e.target, attempt, p.opts.Retries))
 		}
 		if dlErr = p.download(ctx, abs, e); dlErr == nil {

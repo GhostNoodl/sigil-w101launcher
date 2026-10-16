@@ -52,7 +52,8 @@ to character select in seconds.
 
 Notes:
 
-- The install location is auto-detected; change it anytime under
+- The install location is auto-detected (including Steam libraries on
+  any drive); change it anytime under
   **⚙ Settings** (install dir, light/dark theme, and an option to
   minimize the launcher when the game starts).
 
@@ -102,7 +103,7 @@ your machine).
 
 ## Building from source
 
-Requires Go 1.24+. No cgo, no Node toolchain — the Wails frontend is plain
+Requires Go 1.26+. No cgo, no Node toolchain — the Wails frontend is plain
 HTML/CSS/JS embedded in the binary.
 
 ```sh
@@ -131,7 +132,7 @@ form. The actual game, `Bin\WizardGraphicalClient.exe`, natively accepts:
 WizardGraphicalClient.exe -L <login host> <port> -A <locale> [-ST -P 0 -PT 0] -U ..<userID> <ck2> <username>
 ```
 
-W101 Client reproduces the launcher's side of that handshake
+Sigil reproduces the launcher's side of that handshake
 (`UserAuthenV3`, including the `IsSteamPatcher` flag Steam-linked accounts
 require), fetches a fresh session token, and hands it to the client.
 Patching talks to the official patch server and CDN; news comes from

@@ -13,6 +13,8 @@ import (
 	"github.com/GhostNoodl/sigil-w101launcher/internal/patch"
 )
 
+var errNoInstallDir = errors.New("Wizard101 install folder not found; choose it under Settings (or run 'sigil config set-dir <path>')")
+
 type PlayOptions struct {
 	Username string
 	Password string
@@ -31,7 +33,7 @@ func (o *PlayOptions) logf(format string, args ...any) {
 // Patch runs only the patch stage (no login, no launch).
 func Patch(ctx context.Context, cfg *config.Config, full bool, log func(string)) error {
 	if cfg.InstallDir == "" {
-		return errors.New("install directory not found; set it with 'sigil config set-dir <path>'")
+		return errNoInstallDir
 	}
 	opts := PlayOptions{Log: log}
 	opts.logf("Checking for updates...")
@@ -56,7 +58,7 @@ func Patch(ctx context.Context, cfg *config.Config, full bool, log func(string))
 // complete Steam ticket validation.
 func Play(ctx context.Context, cfg *config.Config, opts PlayOptions) error {
 	if cfg.InstallDir == "" {
-		return errors.New("install directory not found; set it with 'sigil config set-dir <path>'")
+		return errNoInstallDir
 	}
 	if opts.Username == "" {
 		return errors.New("no username")

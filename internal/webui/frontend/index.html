@@ -259,6 +259,10 @@
     margin-bottom: 2px;
   }
   .news-item .news-text { color: var(--muted); }
+  /* The news panel reuses the .log box; undo its monospace font and
+     break-anywhere wrapping so preview text wraps between words. */
+  #news { font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif; font-size: 12px; }
+  #news div { white-space: normal; word-break: normal; overflow-wrap: anywhere; }
 
   /* ---------- log ---------- */
   .log {
